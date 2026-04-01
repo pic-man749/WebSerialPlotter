@@ -103,17 +103,19 @@ export class DataTable {
   private buildDOM(): void {
     this.container.innerHTML = `
       <h2 class="panel__title">データ一覧</h2>
-      <table class="table">
-        <thead>
-          <tr>
-            <th style="width: 40px;">色</th>
-            <th>キー名</th>
-            <th>最新値</th>
-            <th style="width: 100px;">軸</th>
-          </tr>
-        </thead>
-        <tbody id="data-table-body"></tbody>
-      </table>
+      <div class="data-table__scroll">
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="width: 40px;">色</th>
+              <th>キー名</th>
+              <th>最新値</th>
+              <th style="width: 100px;">軸</th>
+            </tr>
+          </thead>
+          <tbody id="data-table-body"></tbody>
+        </table>
+      </div>
     `;
 
     this.tbody = this.container.querySelector('#data-table-body') as HTMLTableSectionElement;

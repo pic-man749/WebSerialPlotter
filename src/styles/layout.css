@@ -6,8 +6,8 @@
   display: grid;
   grid-template-rows: auto auto 1fr auto auto;
   grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-md);
-  padding: var(--spacing-lg);
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
   height: 100vh;
   min-height: 0;
 }
@@ -24,7 +24,9 @@
 .data-table {
   grid-column: 1;
   min-height: 0;
-  overflow: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .send-panel {
@@ -33,16 +35,31 @@
   overflow: auto;
 }
 
+/* 非グラフパネルのパディングをコンパクト化 */
+.connection-panel,
+.chart-controls,
+.data-table,
+.send-panel {
+  padding: var(--spacing-sm) var(--spacing-md);
+}
+
+/* データテーブルのスクロール領域 */
+.data-table__scroll {
+  overflow-y: auto;
+  max-height: 150px;
+  min-height: 0;
+}
+
 /* ヘッダーレイアウト */
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-sm) var(--spacing-lg);
+  padding: var(--spacing-xs) var(--spacing-md);
 }
 
 .header__title {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-lg);
   color: var(--color-text-primary);
 }
 

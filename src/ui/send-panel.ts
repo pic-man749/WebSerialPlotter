@@ -69,7 +69,7 @@ export class SendPanel {
   private buildDOM(): void {
     this.container.innerHTML = `
       <h2 class="panel__title">送受信</h2>
-      <div class="form-row" style="margin-bottom: var(--spacing-md);">
+      <div class="form-row" style="margin-bottom: var(--spacing-sm);">
         <div class="form-group">
           <label class="form-group__label" for="input-mode">入力形式</label>
           <select class="select" id="input-mode">
@@ -87,7 +87,7 @@ export class SendPanel {
           </select>
         </div>
       </div>
-      <div class="form-row" style="margin-bottom: var(--spacing-sm);">
+      <div class="form-row" style="margin-bottom: var(--spacing-xs);">
         <input class="input" id="send-input" type="text"
                placeholder="送信データを入力..." style="flex: 1;" disabled />
         <button class="btn" id="send-btn" disabled>送信</button>

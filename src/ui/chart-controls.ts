@@ -46,7 +46,7 @@ export class ChartControls {
       <h2 class="panel__title">グラフ操作</h2>
 
       <!-- 1行目: 測定ボタン・FPS・時間幅 -->
-      <div class="form-row" style="margin-bottom: var(--spacing-md);">
+      <div class="form-row" style="margin-bottom: var(--spacing-xs);">
         <button class="btn btn--success" id="measure-btn">● 測定開始</button>
 
         <div class="form-group" style="flex: 1;">
@@ -63,7 +63,7 @@ export class ChartControls {
       </div>
 
       <!-- 2行目: Y1軸設定 -->
-      <div class="form-row" style="margin-bottom: var(--spacing-sm);">
+      <div class="form-row" style="margin-bottom: var(--spacing-xs);">
         <span class="form-group__label" style="min-width: 3em;">Y1軸</span>
         <label class="radio-label">
           <input type="radio" name="y1-mode" value="auto" checked id="y1-auto" />
