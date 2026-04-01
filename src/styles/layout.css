@@ -1,0 +1,108 @@
+/* ========================================
+   CSS Gridによる全体レイアウト
+   ======================================== */
+
+.app-layout {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto auto;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  height: 100vh;
+  min-height: 0;
+}
+
+/* ヘッダー・接続設定・グラフ・グラフ操作は全幅 */
+.header,
+.connection-panel,
+.chart-area,
+.chart-controls {
+  grid-column: 1 / -1;
+}
+
+/* データテーブルと送受信パネルは2カラム */
+.data-table {
+  grid-column: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.send-panel {
+  grid-column: 2;
+  min-height: 0;
+  overflow: auto;
+}
+
+/* ヘッダーレイアウト */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-sm) var(--spacing-lg);
+}
+
+.header__title {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-primary);
+}
+
+.header__status {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* グラフ表示領域 */
+.chart-area {
+  min-height: 250px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Web Serial API 非対応オーバーレイ */
+.unsupported-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(13, 17, 23, 0.95);
+}
+
+.unsupported-overlay:not([hidden]) {
+  display: flex;
+}
+
+.unsupported-message {
+  text-align: center;
+  padding: var(--spacing-xl);
+  border: 1px solid var(--color-danger);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-secondary);
+  max-width: 500px;
+}
+
+.unsupported-message h2 {
+  color: var(--color-danger);
+  margin-bottom: var(--spacing-md);
+}
+
+.unsupported-message p {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+/* トースト通知コンテナ */
+.toast-container {
+  position: fixed;
+  top: var(--spacing-lg);
+  right: var(--spacing-lg);
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  pointer-events: none;
+}

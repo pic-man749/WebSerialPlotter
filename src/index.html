@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Serial Plotter</title>
+  <link rel="stylesheet" href="./styles/variables.css" />
+  <link rel="stylesheet" href="./styles/base.css" />
+  <link rel="stylesheet" href="./styles/layout.css" />
+  <link rel="stylesheet" href="./styles/components.css" />
+</head>
+<body>
+  <div class="app-layout">
+    <!-- ヘッダー -->
+    <header class="header panel">
+      <h1 class="header__title">Web Serial Plotter</h1>
+      <div class="header__status" id="connection-status">
+        <span class="status-indicator"></span>
+        <span class="status-text">未接続</span>
+      </div>
+    </header>
+
+    <!-- 接続設定パネル -->
+    <section class="connection-panel panel" id="connection-panel"></section>
+
+    <!-- グラフ表示領域 -->
+    <section class="chart-area panel" id="chart-area"></section>
+
+    <!-- グラフ操作パネル -->
+    <section class="chart-controls panel" id="chart-controls"></section>
+
+    <!-- データ一覧テーブル -->
+    <section class="data-table panel" id="data-table"></section>
+
+    <!-- 送受信パネル -->
+    <section class="send-panel panel" id="send-panel"></section>
+
+    <!-- トースト通知コンテナ -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Web Serial API 非対応メッセージ -->
+    <div class="unsupported-overlay" id="unsupported-overlay" hidden>
+      <div class="unsupported-message">
+        <h2>Web Serial API 非対応</h2>
+        <p>このブラウザは Web Serial API をサポートしていません。</p>
+        <p>Chrome, Edge, Opera などの Chromium ベースブラウザの最新版をご利用ください。</p>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>
