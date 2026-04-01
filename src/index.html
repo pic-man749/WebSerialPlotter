@@ -23,17 +23,35 @@
     <!-- 接続設定パネル -->
     <section class="connection-panel panel" id="connection-panel"></section>
 
-    <!-- グラフ表示領域 -->
-    <section class="chart-area panel" id="chart-area"></section>
+    <!-- リサイズ可能なメインコンテンツ領域 -->
+    <div class="resizable-container" id="resizable-container">
+      <!-- 上部ペイン：グラフ表示 -->
+      <div class="pane-top" id="pane-top">
+        <section class="chart-area panel" id="chart-area"></section>
+      </div>
 
-    <!-- グラフ操作パネル -->
-    <section class="chart-controls panel" id="chart-controls"></section>
+      <!-- 高さ調整ハンドル -->
+      <div
+        class="resize-handle"
+        id="resize-handle"
+        role="separator"
+        aria-orientation="horizontal"
+        aria-label="グラフと操作パネルの高さ調整"
+        tabindex="0"
+      ></div>
 
-    <!-- データ一覧テーブル -->
-    <section class="data-table panel" id="data-table"></section>
+      <!-- 下部ペイン：操作・データパネル群 -->
+      <div class="pane-bottom">
+        <!-- グラフ操作パネル -->
+        <section class="chart-controls panel" id="chart-controls"></section>
 
-    <!-- 送受信パネル -->
-    <section class="send-panel panel" id="send-panel"></section>
+        <!-- データ一覧・送受信（2カラム） -->
+        <div class="bottom-grid">
+          <section class="data-table panel" id="data-table"></section>
+          <section class="send-panel panel" id="send-panel"></section>
+        </div>
+      </div>
+    </div>
 
     <!-- トースト通知コンテナ -->
     <div class="toast-container" id="toast-container"></div>

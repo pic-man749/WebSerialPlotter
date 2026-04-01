@@ -279,7 +279,8 @@
 
 /* スクロールリスト */
 .scroll-list {
-  max-height: 200px;
+  flex: 1;
+  min-height: 0;
   overflow-y: auto;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);

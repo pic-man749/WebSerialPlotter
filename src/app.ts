@@ -7,6 +7,7 @@ import { SendPanel } from './ui/send-panel.js';
 import { ChartControls } from './ui/chart-controls.js';
 import { DataTable } from './ui/data-table.js';
 import { Toast } from './ui/toast.js';
+import { ResizeHandle } from './ui/resize-handle.js';
 import { AxisId, SeriesConfig } from './types/index.js';
 
 /** データ系列カラーパレット（CSS変数と同一の8色サイクル） */
@@ -85,6 +86,12 @@ export class App {
     );
     this.toast = new Toast(
       document.getElementById('toast-container')!,
+    );
+    // リサイズハンドルは自身でイベントを管理するため参照保持不要
+    new ResizeHandle(
+      document.getElementById('resize-handle')!,
+      document.getElementById('pane-top')!,
+      document.getElementById('resizable-container')!,
     );
   }
 

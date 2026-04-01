@@ -1,41 +1,107 @@
 /* ========================================
-   CSS Gridによる全体レイアウト
+   Flexboxによる全体レイアウト（上下リサイズ対応）
    ======================================== */
 
 .app-layout {
-  display: grid;
-  grid-template-rows: auto auto 1fr auto auto;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: var(--spacing-sm);
   padding: var(--spacing-sm);
   height: 100vh;
-  min-height: 0;
+  overflow: hidden;
 }
 
-/* ヘッダー・接続設定・グラフ・グラフ操作は全幅 */
+/* ヘッダー・接続設定は高さを内容に合わせる */
 .header,
-.connection-panel,
-.chart-area,
-.chart-controls {
-  grid-column: 1 / -1;
+.connection-panel {
+  flex-shrink: 0;
 }
 
-/* データテーブルと送受信パネルは2カラム */
-.data-table {
-  grid-column: 1;
+/* ──────────────────────────────────────
+   リサイズ可能なメインコンテンツ領域
+   ────────────────────────────────────── */
+
+.resizable-container {
+  flex: 1;
   min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 上部ペイン：グラフ表示 */
+.pane-top {
+  /* 初期高さ 60%。ドラッグ操作でJS側がpxに上書きする */
+  height: 60%;
+  min-height: 100px;
+  flex-shrink: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
-.send-panel {
-  grid-column: 2;
+.chart-area {
+  flex: 1;
   min-height: 0;
-  overflow: auto;
+  position: relative;
+  overflow: hidden;
 }
 
-/* 非グラフパネルのパディングをコンパクト化 */
+/* ドラッグハンドル */
+.resize-handle {
+  flex-shrink: 0;
+  height: 8px;
+  cursor: ns-resize;
+  background: var(--color-border);
+  border-radius: var(--radius-sm);
+  position: relative;
+  transition: background var(--transition-fast);
+  /* グリップドットを中央に表示 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resize-handle::before {
+  content: '';
+  width: 32px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--color-text-secondary);
+  opacity: 0.5;
+  transition: opacity var(--transition-fast), width var(--transition-fast);
+}
+
+.resize-handle:hover,
+.resize-handle--dragging {
+  background: color-mix(in srgb, var(--color-accent) 30%, var(--color-border));
+}
+
+.resize-handle:hover::before,
+.resize-handle--dragging::before {
+  opacity: 1;
+  width: 48px;
+}
+
+/* 下部ペイン：操作・データパネル群 */
+.pane-bottom {
+  flex: 1;
+  min-height: 80px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+/* データ一覧・送受信の2カラムグリッド */
+.bottom-grid {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-sm);
+}
+
+/* 非グラフパネルのパディング */
 .connection-panel,
 .chart-controls,
 .data-table,
@@ -43,11 +109,25 @@
   padding: var(--spacing-sm) var(--spacing-md);
 }
 
+.data-table {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.send-panel {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
 /* データテーブルのスクロール領域 */
 .data-table__scroll {
   overflow-y: auto;
-  max-height: 150px;
-  min-height: 0;
+  min-height: 60px;
+  flex: 1;
 }
 
 /* ヘッダーレイアウト */
