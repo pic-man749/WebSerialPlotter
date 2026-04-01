@@ -320,7 +320,8 @@ export class ChartRenderer {
     if (!this.plot) return;
 
     if (axisConfig.mode === 'manual') {
-      this.plot.scales[scaleKey].auto = false;
+      // uPlot の accScale は auto を関数として呼び出すため、ブール値ではなく関数を設定する
+      this.plot.scales[scaleKey].auto = (_u: uPlot, _found: boolean) => false;
       this.plot.setScale(scaleKey, { min: axisConfig.min, max: axisConfig.max });
     } else {
       // auto モードへの切り替えは関数形式で設定する
