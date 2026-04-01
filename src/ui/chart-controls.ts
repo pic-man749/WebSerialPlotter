@@ -75,11 +75,11 @@ export class ChartControls {
         </label>
         <div class="form-group">
           <label class="form-group__label" for="y1-min">Min</label>
-          <input class="input" id="y1-min" type="number" style="width: 80px;" disabled />
+          <input class="input" id="y1-min" type="number" style="width: 80px;" value="0" disabled />
         </div>
         <div class="form-group">
           <label class="form-group__label" for="y1-max">Max</label>
-          <input class="input" id="y1-max" type="number" style="width: 80px;" disabled />
+          <input class="input" id="y1-max" type="number" style="width: 80px;" value="100" disabled />
         </div>
       </div>
 
@@ -96,11 +96,11 @@ export class ChartControls {
         </label>
         <div class="form-group">
           <label class="form-group__label" for="y2-min">Min</label>
-          <input class="input" id="y2-min" type="number" style="width: 80px;" disabled />
+          <input class="input" id="y2-min" type="number" style="width: 80px;" value="0" disabled />
         </div>
         <div class="form-group">
           <label class="form-group__label" for="y2-max">Max</label>
-          <input class="input" id="y2-max" type="number" style="width: 80px;" disabled />
+          <input class="input" id="y2-max" type="number" style="width: 80px;" value="100" disabled />
         </div>
       </div>
     `;
