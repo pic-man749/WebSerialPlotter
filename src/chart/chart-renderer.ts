@@ -227,12 +227,20 @@ export class ChartRenderer {
    */
   private buildAxesConfig(): uPlot.Axis[] {
     return [
-      // X軸（時間軸 下部）
+      // X軸（時間軸 下部）：時刻のみ表示
       {
         stroke: AXIS_STROKE,
         font: AXIS_FONT,
         grid: { stroke: GRID_COLOR, width: 1 },
         ticks: { stroke: GRID_COLOR, width: 1 },
+        values: (_u, splits) =>
+          splits.map(ts => {
+            const d = new Date(ts * 1000);
+            const hh = String(d.getHours()).padStart(2, '0');
+            const mm = String(d.getMinutes()).padStart(2, '0');
+            const ss = String(d.getSeconds()).padStart(2, '0');
+            return `${hh}:${mm}:${ss}`;
+          }),
       },
       // Y1軸（左側）
       {
