@@ -14,7 +14,7 @@ const DEFAULT_CONFIG: ChartConfig = {
 /** グリッド・軸の色定義 */
 const GRID_COLOR = 'rgba(255, 255, 255, 0.07)';
 const AXIS_STROKE = 'rgba(139, 148, 158, 0.8)';
-const AXIS_FONT = '11px system-ui, -apple-system, sans-serif';
+const AXIS_FONT = '14px system-ui, -apple-system, sans-serif';
 
 /**
  * uPlot を使用したリアルタイムグラフ描画エンジン
