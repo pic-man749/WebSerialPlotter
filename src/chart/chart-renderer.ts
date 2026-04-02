@@ -5,7 +5,7 @@ import { DataStore } from '../store/data-store.js';
 
 /** デフォルトのグラフ設定 */
 const DEFAULT_CONFIG: ChartConfig = {
-  fps: 30,
+  fps: 60,
   timeRangeSec: 10,
   y1: { mode: 'auto', min: 0, max: 100 },
   y2: { mode: 'auto', min: 0, max: 100 },
