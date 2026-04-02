@@ -51,8 +51,8 @@ export class ChartControls {
 
         <div class="form-group" style="flex: 1;">
           <label class="form-group__label" for="fps-slider">FPS</label>
-          <input class="slider" id="fps-slider" type="range" min="1" max="60" step="1" value="30" />
-          <span class="form-group__label" id="fps-value" style="min-width: 2.5em; text-align: right;">30</span>
+          <input class="slider" id="fps-slider" type="range" min="1" max="60" step="1" value="60" />
+          <span class="form-group__label" id="fps-value" style="min-width: 2.5em; text-align: right;">60</span>
         </div>
 
         <div class="form-group" style="flex: 1;">

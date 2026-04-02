@@ -5,7 +5,7 @@ import { DataStore } from '../store/data-store.js';
 
 /** デフォルトのグラフ設定 */
 const DEFAULT_CONFIG: ChartConfig = {
-  fps: 30,
+  fps: 60,
   timeRangeSec: 10,
   y1: { mode: 'auto', min: 0, max: 100 },
   y2: { mode: 'auto', min: 0, max: 100 },
@@ -14,7 +14,7 @@ const DEFAULT_CONFIG: ChartConfig = {
 /** グリッド・軸の色定義 */
 const GRID_COLOR = 'rgba(255, 255, 255, 0.07)';
 const AXIS_STROKE = 'rgba(139, 148, 158, 0.8)';
-const AXIS_FONT = '11px system-ui, -apple-system, sans-serif';
+const AXIS_FONT = '14px system-ui, -apple-system, sans-serif';
 
 /**
  * uPlot を使用したリアルタイムグラフ描画エンジン
@@ -227,12 +227,20 @@ export class ChartRenderer {
    */
   private buildAxesConfig(): uPlot.Axis[] {
     return [
-      // X軸（時間軸 下部）
+      // X軸（時間軸 下部）：時刻のみ表示
       {
         stroke: AXIS_STROKE,
         font: AXIS_FONT,
         grid: { stroke: GRID_COLOR, width: 1 },
         ticks: { stroke: GRID_COLOR, width: 1 },
+        values: (_u, splits) =>
+          splits.map(ts => {
+            const d = new Date(ts * 1000);
+            const hh = String(d.getHours()).padStart(2, '0');
+            const mm = String(d.getMinutes()).padStart(2, '0');
+            const ss = String(d.getSeconds()).padStart(2, '0');
+            return `${hh}:${mm}:${ss}`;
+          }),
       },
       // Y1軸（左側）
       {
@@ -324,8 +332,8 @@ export class ChartRenderer {
       this.plot.scales[scaleKey].auto = (_u: uPlot, _found: boolean) => false;
       this.plot.setScale(scaleKey, { min: axisConfig.min, max: axisConfig.max });
     } else {
-      // auto モードへの切り替えは関数形式で設定する
-      this.plot.scales[scaleKey].auto = (_self: uPlot, _foundRange: boolean) => _foundRange;
+      // auto モードへの切り替えは常に true を返す関数として設定する
+      this.plot.scales[scaleKey].auto = () => true;
     }
   }
 
@@ -371,10 +379,10 @@ export class ChartRenderer {
       : this.buildEmptyData();
 
     this.plot.batch(() => {
-      // データ更新（auto scaling を抑制）
-      this.plot!.setData(data, false);
+      // データ更新（true でスケール再計算を許可し、auto Y軸が反映される）
+      this.plot!.setData(data, true);
 
-      // 時間軸を自動スクロール
+      // 時間軸を自動スクロール（setData の x 自動計算を上書き）
       this.plot!.setScale('x', { min: minTime, max: maxTime });
 
       // 手動レンジの場合は軸を明示的に設定
