@@ -332,8 +332,8 @@ export class ChartRenderer {
       this.plot.scales[scaleKey].auto = (_u: uPlot, _found: boolean) => false;
       this.plot.setScale(scaleKey, { min: axisConfig.min, max: axisConfig.max });
     } else {
-      // auto モードへの切り替えは関数形式で設定する
-      this.plot.scales[scaleKey].auto = (_self: uPlot, _foundRange: boolean) => _foundRange;
+      // auto モードへの切り替えは常に true を返す関数として設定する
+      this.plot.scales[scaleKey].auto = () => true;
     }
   }
 
@@ -379,10 +379,10 @@ export class ChartRenderer {
       : this.buildEmptyData();
 
     this.plot.batch(() => {
-      // データ更新（auto scaling を抑制）
-      this.plot!.setData(data, false);
+      // データ更新（true でスケール再計算を許可し、auto Y軸が反映される）
+      this.plot!.setData(data, true);
 
-      // 時間軸を自動スクロール
+      // 時間軸を自動スクロール（setData の x 自動計算を上書き）
       this.plot!.setScale('x', { min: minTime, max: maxTime });
 
       // 手動レンジの場合は軸を明示的に設定
